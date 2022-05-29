@@ -182,10 +182,10 @@ void loop()
     xyz[0] = ypr[1] * 180/M_PI;
     xyz[1] = ypr[2] * 180/M_PI;
     float yaw = ypr[0] * 180/M_PI;
-    float temp = float((mpu.getTemperature()+521)/340+35.0);
+    float temp = (mpu.getTemperature()+521.0)/340.0+35.0;
     //const e = '{"x":25.3, "y":2.0}'
     char xy[120];
-    if (abs(xyz[2]-xyz[0]) > 0.2 || abs(xyz[3]-xyz[1]) > 0.2) {
+    if (if abs(xyz[2]-xyz[0]) > 0.2 || abs(xyz[3]-xyz[1]) > 0.2 || millis() % 1000 < 10) {
       sprintf(xy,"{\"x\":%f, \"y\":%f, \"z\":%f, \"t\":%f}",xyz[0],xyz[1],yaw,temp);
       events.send(String(xy).c_str(), "xy", millis());
       xyz[2] = xyz[0];
